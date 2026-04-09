@@ -1,7 +1,7 @@
 """Internships API routes."""
 from flask import Blueprint, jsonify
 from services.firebase_service import db
-from utils.error_handlers import error_response, success_response
+from utils.error_handlers import error_response
 
 internships_bp = Blueprint("internships", __name__, url_prefix="/api")
 
@@ -23,7 +23,7 @@ def get_internships():
             data["id"] = doc.id
             internships.append(data)
 
-        return success_response(internships, "Internships fetched successfully")
+        return jsonify(internships)
 
     except Exception as e:
         return error_response(
